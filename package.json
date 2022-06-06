@@ -1,0 +1,37 @@
+{
+  "name": "setup-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -w",
+    "test": "jest --watchAll --coverage",
+    "lint": "eslint .",
+    "sass": "sass -w src/styles/styles.scss dist/styles/styles.css"
+  },
+  "author": "Jon Pittaluga",
+  "license": "ISC",
+  "prettier": {
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.17.9",
+    "@types/jest": "^27.5.1",
+    "jest": "^28.1.0",
+    "sass": "^1.50.1",
+    "typescript": "^4.6.4"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "@babel/plugin-transform-modules-commonjs"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "git": "^0.1.5"
+  }
+}
