@@ -1,7 +1,8 @@
 .body {
-  width: auto;
-  margin: 0%;
+  // cursor: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0%;
+  width: auto;
 }
 
 // Header, title and logo
@@ -9,7 +10,7 @@
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: rgb(252, 105, 82);
   height: 90px;
   width: 100%;
@@ -22,16 +23,43 @@
     text-align: center;
     display: flex;
     align-items: center;
+    margin-left: 3%;
   }
   &-logo {
     height: 50px;
     margin-right: 8px;
     margin-left: 8px;
   }
+  &-pokeball {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: black;
+    font-weight: 900;
+    margin-right: 3%;
+    & img {
+      height: 35px;
+    }
+    &:hover {
+      color: white;
+      cursor: pointer;
+      text-decoration: underline;
+      & img {
+        margin-top: -3px;
+        height: 38px;
+      }
+    }
+  }
+}
+
+.pokeball {
+  color: red;
 }
 
 // Main container
 .main {
+  // cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,11 +70,18 @@
     top: 30%;
     height: 80px;
     width: auto;
+    z-index: 2;
   }
 }
 
-// List elements
+.main-background {
+  background-color: rgb(252, 105, 82);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
 
+// List elements
 .list-header {
   align-items: center;
   background-color: #ececec;
@@ -58,6 +93,7 @@
   height: 60px;
   max-height: 60px;
   justify-content: space-between;
+  margin-bottom: 2%;
   position: fixed;
   top: 90px;
   width: 100%;
@@ -102,8 +138,10 @@
   flex-direction: row;
   flex-wrap: wrap;
   position: relative;
-  top: 130px;
+  top: 150px;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 
   & .card {
     align-items: center;
@@ -131,9 +169,10 @@
       border: 2px solid rgb(229, 199, 82);
       background-color: rgba(51, 98, 241, 0.9);
       color: white;
-      cursor: pointer;
+      cursor: url('../../dist/images/pokeball-icon-cursor.png'), pointer;
       outline: 2px solid rgb(252, 105, 82);
       outline-offset: 0.15rem;
+      transition: 100ms;
     }
   }
 }

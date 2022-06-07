@@ -1,4 +1,4 @@
-import { Component } from './component-abstract.js';
+import { Component } from '../component-abstract.js';
 export class Header extends Component {
     selector;
     template = '';

@@ -1,4 +1,4 @@
-import { Component } from './component-abstract.js';
+import { Component } from '../component-abstract.js';
 export class Header extends Component {
     selector;
     template = '';
@@ -10,10 +10,10 @@ export class Header extends Component {
     }
     createHTMLTemplate() {
         return `
-    <div class="header">
+    <div class="header pokeball">
       <div class="header-title">
         <h1>The</h1>
-        <img class="header-logo" src="./images/pokemon-logo.svg" alt="">
+        <img class="header-logo" src="../images/pokemon-logo.svg" alt="">
         <h1>App</h1>
       </div>
       <div class="header-pokeball">
@@ -24,4 +24,4 @@ export class Header extends Component {
     </div>`;
     }
 }
-//# sourceMappingURL=header.js.map
+//# sourceMappingURL=pokeball-header.js.map

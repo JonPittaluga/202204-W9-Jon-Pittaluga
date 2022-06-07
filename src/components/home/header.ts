@@ -1,15 +1,16 @@
-import { Component } from './component-abstract.js';
+import { Component } from '../component-abstract.js';
+
 export class Header extends Component {
-    selector;
-    template = '';
-    constructor(selector) {
-        super();
-        this.selector = selector;
-        this.template = this.createHTMLTemplate();
-        this.outerRender(this.selector);
-    }
-    createHTMLTemplate() {
-        return `
+  template: string = '';
+
+  constructor(public selector: string) {
+    super();
+    this.template = this.createHTMLTemplate();
+    this.outerRender(this.selector);
+  }
+
+  createHTMLTemplate() {
+    return `
     <div class="header">
       <div class="header-title">
         <h1>The</h1>
@@ -22,6 +23,5 @@ export class Header extends Component {
         <div>Pokeball</div>
       </div>
     </div>`;
-    }
+  }
 }
-//# sourceMappingURL=header.js.map

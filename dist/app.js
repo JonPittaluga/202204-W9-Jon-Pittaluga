@@ -1,10 +1,10 @@
-import { Home } from './components/main.js';
+import { Header } from './components/home/header.js';
+import { HomeList } from './components/home/home-list.js';
 (() => {
-    document.addEventListener('DOMContentLoaded', main);
+    document.addEventListener('DOMContentLoaded', () => {
+        new Header('header');
+        new HomeList('main');
+        // new Pokeball('main')
+    });
 })();
-function main() {
-    console.log('works');
-    // new Header('.header'); // This is a static element
-    new Home('.main');
-}
 //# sourceMappingURL=app.js.map
