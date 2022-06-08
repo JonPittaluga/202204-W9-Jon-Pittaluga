@@ -4,11 +4,15 @@ import { Pokemon } from '../../../models/pokemon-model.js';
 export class PokemonCard extends Component {
   template: string = '';
 
-  constructor(public selector: string, public pokemon: Pokemon) {
+  constructor(
+    public selector: string,
+    public pokemon: Pokemon,
+    public previewPokemon: (pokemonId: number) => any
+  ) {
     super();
     this.template = this.createHTMLTemplate();
     this.addRender(this.selector);
-    // this.manageEvents();
+    this.manageEvents();
   }
 
   createHTMLTemplate() {
@@ -23,15 +27,25 @@ export class PokemonCard extends Component {
       </div>`;
   }
 
-  // Event listeners do not work. Make them work.
   manageEvents() {
-    const cards: any = document.querySelectorAll('.pokemon');
-    cards.addEventListener('click', this.openPokemonPage.bind(this));
+    document
+      .querySelectorAll('.card.pokemon')
+      .forEach((item) => item.addEventListener('click', this.handlerButton));
+  }
+  previewPokemonLocal(pokemon: number) {
+    this.previewPokemon.bind(this);
   }
 
-  openPokemonPage(pokemon: Pokemon) {
-    console.log(pokemon.id);
+  handlerButton(ev: Event) {
+    const selectId = (<HTMLElement>ev.target).id as string;
+    console.log('click', selectId);
+    // (() => this.previewPokemon(+selectId)).bind(this);
+    this.previewPokemonLocal(+selectId);
   }
+
+  // openPokemonPage(pokemon: Pokemon) {
+  //   console.log(pokemon.id);
+  // }
 
   // manageTemplate() {
   //   document

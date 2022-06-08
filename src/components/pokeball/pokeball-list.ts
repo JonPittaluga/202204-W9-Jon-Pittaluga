@@ -38,7 +38,13 @@ export class Pokeball extends Component {
   }
 
   renderHeader() {
-    return new ListHeader('.list-header', this.countPokemons, this.listSize);
+    return new ListHeader(
+      '.list-header',
+      this.countPokemons,
+      this.listSize,
+      this.loadNext.bind(this),
+      this.loadPrevious.bind(this)
+    );
   }
 
   renderCard(arr: Array<Pokemon>) {
@@ -70,45 +76,12 @@ export class Pokeball extends Component {
   }
 
   // gets the id's for the visible pokemons that will be rendered
-  fetchVisiblePokemons() {
-    let indexes: Array<number> = [];
-
-    if (this.visibleRange.length === 0) {
-      const start: number = 1;
-      const end: number = this.listSize;
-      for (let i = start; i < end; i++) {
-        indexes.push(i);
-        let pokemonToPush: iPokemonModel = this.allPokemons[i];
-        let url = pokemonToPush.url;
-        fetch(url)
-          .then((response) => response.json())
-          .then((pokemonDetails: Pokemon) => {
-            this.renderCard([pokemonDetails]);
-          });
-      }
-    }
-
-    if (this.visibleRange.length > 0) {
-      const lastVisibleId = [...this.visibleRange].pop()[1];
-      const start = lastVisibleId + 1 - this.listSize;
-      const end = lastVisibleId + 1;
-      for (let i = start; i < end; i++) {
-        indexes.push(i);
-        let pokemonToPush: iPokemonModel = this.allPokemons[i];
-        let url = pokemonToPush.url;
-        fetch(url)
-          .then((response) => response.json())
-          .then((pokemonDetails: Pokemon) => {
-            this.renderCard([pokemonDetails]);
-            // this.visiblePokemons.push(pokemonDetails);
-          });
-      }
-    }
-
-    this.visibleRange.push([indexes.shift(), indexes.pop()]);
-    console.log(this.visibleRange); // saves the first and the last index of the pokemons that will be rendered
-    console.log(this.visiblePokemons); // saves the first and the last index of the pokemons that will be rendered
-    console.log(typeof this.visiblePokemons); // saves the first and the last index of the pokemons that will be rendered
+  fetchVisiblePokemons(group: Array<iPokemonModel>) {
+    group.forEach((item, index) => this.fetchDetailsAndRender(item));
+    this.visibleRange.push(
+      this.visibleRange[this.visibleRange.length - 1] + this.listSize
+    ); // To keep track of the latest selections
+    console.log(this.visibleRange); // To keep track of the latest selections
   }
 
   fetchPokemonDetails(pokemon: iPokemonModel) {
@@ -119,5 +92,18 @@ export class Pokeball extends Component {
         // console.log(pokemonDetails);
         // this.renderPokemon(pokemonDetails);
       });
+  }
+
+  loadPrevious() {
+    console.log('load previous clicked');
+  }
+
+  loadNext() {
+    console.log('visibleRange', this.visibleRange[1]);
+
+    this.fetchVisiblePokemons(
+      [...this.allPokemons].splice(this.visibleRange[1], this.listSize)
+    );
+    this.outerRender('.list__cards');
   }
 }

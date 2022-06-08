@@ -97,7 +97,7 @@
   position: fixed;
   top: 90px;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
   &__title {
     font-size: 1.2rem;
     color: rgb(33, 33, 33);
@@ -157,13 +157,18 @@
     margin-bottom: 0;
     min-width: 120px;
     padding: 1rem;
+    & .card-image {
+      pointer-events: none;
+    }
     & img {
       height: auto;
     }
+
     & .card-title {
       margin-top: -15px;
       font-weight: 400;
       font-size: 1rem;
+      pointer-events: none;
     }
     &:hover {
       border: 2px solid rgb(229, 199, 82);

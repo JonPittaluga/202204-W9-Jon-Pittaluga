@@ -2,14 +2,16 @@ import { Component } from '../../component-abstract.js';
 export class PokemonCard extends Component {
     selector;
     pokemon;
+    previewPokemon;
     template = '';
-    constructor(selector, pokemon) {
+    constructor(selector, pokemon, previewPokemon) {
         super();
         this.selector = selector;
         this.pokemon = pokemon;
+        this.previewPokemon = previewPokemon;
         this.template = this.createHTMLTemplate();
         this.addRender(this.selector);
-        // this.manageEvents();
+        this.manageEvents();
     }
     createHTMLTemplate() {
         return `
@@ -20,13 +22,19 @@ export class PokemonCard extends Component {
         <h3 class="card-title pokemonName">${this.pokemon.name.toUpperCase()}</h3>
       </div>`;
     }
-    // Event listeners do not work. Make them work.
     manageEvents() {
-        const cards = document.querySelectorAll('.pokemon');
-        cards.addEventListener('click', this.openPokemonPage.bind(this));
+        document
+            .querySelectorAll('.card.pokemon')
+            .forEach((item) => item.addEventListener('click', this.handlerButton));
     }
-    openPokemonPage(pokemon) {
-        console.log(pokemon.id);
+    previewPokemonLocal(pokemon) {
+        this.previewPokemon.bind(this);
+    }
+    handlerButton(ev) {
+        const selectId = ev.target.id;
+        console.log('click', selectId);
+        // (() => this.previewPokemon(+selectId)).bind(this);
+        this.previewPokemonLocal(+selectId);
     }
 }
 //# sourceMappingURL=home-card.js.map

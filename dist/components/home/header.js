@@ -16,8 +16,7 @@ export class Header extends Component {
         <img class="header-logo" src="./images/pokemon-logo.svg" alt="">
         <h1>App</h1>
       </div>
-      <div class="header-pokeball">
-      
+      <div class="header-pokeball">    
         <img src="./images/pokeball-icon.png"></img>
         <div>Pokeball</div>
       </div>
